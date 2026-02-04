@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IZS BIOINFORMATICS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     <style>
         * {
@@ -15,310 +15,124 @@
         }
 
         :root {
-            --primary: #2fbeb6; /* IZS color*/
-            --primary-dark: #1e8d87;
-            --primary-light: #5fd6cf;
-            --secondary: #2f6bb6;
-            --dark: #0a0e17;
-            --darker: #050811;
-            --light: #e0f7ff;
-            --gray: #8a8fa3;
-            --success: #00ff9d;
-            --error: #ff4757;
-            --card-bg: rgba(16, 23, 41, 0.8);
-            --border-glow: rgba(47, 190, 182, 0.3);
+            --primary: #01679c;
+            --secondary: #f2f2f3;
+            --background: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #e0e0e0;
+            --success: #10b981;
+            --error: #ef4444;
         }
 
         body {
-            font-family: 'Roboto Mono', monospace;
-            background-color: var(--dark);
-            color: var(--light);
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(47, 190, 182, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(47, 190, 182, 0.1) 0%, transparent 20%),
-                linear-gradient(to bottom, var(--darker), var(--dark));
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header-container {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            height: 100vh;
             display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(47, 190, 182, 0.2);
-            position: relative;
-            gap: 30px;
-        }
-
-        .header-container::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 200px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), transparent);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            height: 70px;
-            width: auto;
-            filter: drop-shadow(0 0 10px rgba(47, 190, 182, 0.4));
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 15px rgba(47, 190, 182, 0.6));
-        }
-
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .title-section {
-            flex: 1;
-            text-align: left;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 2.8rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 5px;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 15px rgba(47, 190, 182, 0.3);
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: var(--gray);
-            max-width: 1200px;
-            line-height: 1.6;
-        }
-
-        .input-section {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 40px;
-            border: 1px solid var(--border-glow);
-            box-shadow: 0 0 25px rgba(47, 190, 182, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
+            flex-direction: column;
             overflow: hidden;
         }
 
-        .input-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .input-label {
+        .main-container {
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            color: var(--primary);
-            font-weight: 500;
+            flex-direction: column;
+            height: 100vh;
+            padding: 0;
+            position: relative;
         }
 
-        .input-label i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .input-wrapper {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        #userInput {
-            flex: 1;
-            padding: 18px 20px;
-            background: rgba(5, 8, 17, 0.7);
-            border: 1px solid rgba(47, 190, 182, 0.3);
-            border-radius: 8px;
-            color: var(--light);
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1rem;
-            resize: vertical;
-            min-height: 120px;
-            transition: all 0.3s;
-        }
-
-        #userInput:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(47, 190, 182, 0.2);
-        }
-
-        #userInput::placeholder {
-            color: var(--gray);
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 15px;
-        }
-
-        #generateBtn {
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            color: var(--darker);
-            border: none;
-            padding: 15px 35px;
-            border-radius: 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 1px;
-        }
-
-        #generateBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(47, 190, 182, 0.4);
-        }
-
-        #generateBtn:active {
-            transform: translateY(-1px);
-        }
-
-        #generateBtn:disabled {
-            background: var(--gray);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--gray);
-        }
-
-        .status-dot.active {
-            background-color: var(--success);
-            box-shadow: 0 0 10px var(--success);
-        }
-
-        .status-dot.error {
-            background-color: var(--error);
-            box-shadow: 0 0 10px var(--error);
-        }
-
-        .results-section {
+        .results-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
+            height: 100vh;
+            gap: 1px;
+            background-color: var(--border);
+            overflow: hidden;
         }
 
         @media (max-width: 1024px) {
-            .results-section {
+            .results-container {
                 grid-template-columns: 1fr;
             }
         }
 
-        .result-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 0;
-            border: 1px solid var(--border-glow);
-            box-shadow: 0 0 25px rgba(47, 190, 182, 0.1);
-            backdrop-filter: blur(10px);
-            overflow: hidden;
+        .result-panel {
+            background-color: var(--background);
             display: flex;
             flex-direction: column;
-            height: 600px;
+            height: 100%;
+            overflow: hidden;
         }
 
-        .result-header {
-            padding: 20px 25px;
-            background: rgba(5, 8, 17, 0.7);
-            border-bottom: 1px solid rgba(47, 190, 182, 0.2);
+        .panel-header {
+            padding: 16px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background-color: var(--background);
+            border-radius: 2.4rem 2.4rem 0 0;
         }
 
-        .result-title {
+        .panel-title {
             display: flex;
             align-items: center;
             gap: 12px;
+            font-size: 15px;
+            font-weight: 600;
             color: var(--primary);
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
         }
 
-        .result-title i {
-            font-size: 1.3rem;
+        .panel-title i {
+            font-size: 18px;
         }
 
-        .result-content {
+        .panel-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-light);
+        }
+
+        .status-dot.active {
+            background-color: var(--success);
+        }
+
+        .status-dot.error {
+            background-color: var(--error);
+        }
+
+        .panel-content {
             flex: 1;
-            padding: 0;
             overflow: hidden;
             position: relative;
+            border-radius: 0 0 2.4rem 2.4rem;
         }
 
         #nextflowCode {
             width: 100%;
             height: 100%;
-            padding: 25px;
-            background: rgba(5, 8, 17, 0.5);
-            color: var(--light);
+            padding: 20px;
+            padding-bottom: 250px; 
+            background-color: var(--background);
+            color: var(--text);
             font-family: 'Roboto Mono', monospace;
-            font-size: 0.95rem;
+            font-size: 14px;
             line-height: 1.6;
             white-space: pre;
             overflow: auto;
             border: none;
             resize: none;
+            border-radius: 0 0 2.4rem 2.4rem;
         }
 
         #mermaidContainer {
@@ -328,9 +142,10 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: rgba(5, 8, 17, 0.3);
+            background-color: var(--background);
             position: relative;
             cursor: grab;
+            border-radius: 0 0 2.4rem 2.4rem;
         }
 
         #mermaidContainer.dragging {
@@ -338,7 +153,6 @@
             user-select: none;
         }
 
-        /* Mermaid adaptive containers */
         #mermaidDiagram {
             width: 100%;
             height: 100%;
@@ -352,7 +166,6 @@
             overflow: visible;
         }
 
-        /* make sure Mermaid SVG fulfill the container */
         #mermaidDiagram svg {
             width: 100% !important;
             height: 100% !important;
@@ -362,77 +175,63 @@
             transition: transform 0.3s ease;
         }
 
-        /* toolbar */
         .zoom-controls {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 16px;
+            right: 16px;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            background: rgba(5, 8, 17, 0.85);
-            border-radius: 8px;
+            gap: 6px;
+            background-color: var(--background);
+            border-radius: 1.2rem;
             padding: 8px;
-            border: 1px solid rgba(47, 190, 182, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .zoom-btn {
-            background: rgba(47, 190, 182, 0.2);
-            border: 1px solid rgba(47, 190, 182, 0.5);
-            color: var(--light);
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
+            background-color: var(--background);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 32px;
+            height: 32px;
+            border-radius: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 1rem;
+            font-size: 14px;
         }
 
         .zoom-btn:hover {
-            background: rgba(47, 190, 182, 0.4);
-            transform: scale(1.1);
-        }
-
-        .zoom-btn:active {
-            transform: scale(0.95);
+            background-color: var(--secondary);
+            border-color: var(--primary);
         }
 
         .zoom-btn.reset {
-            background: rgba(47, 107, 182, 0.2);
-            border-color: rgba(47, 107, 182, 0.5);
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
 
         .zoom-btn.reset:hover {
-            background: rgba(47, 107, 182, 0.4);
-        }
-
-        .zoom-btn.pan {
-            background: rgba(147, 107, 182, 0.2);
-            border-color: rgba(147, 107, 182, 0.5);
-        }
-
-        .zoom-btn.pan:hover {
-            background: rgba(147, 107, 182, 0.4);
+            background-color: #015a8a;
         }
 
         .zoom-btn.pan.active {
-            background: rgba(147, 107, 182, 0.6);
-            border-color: rgba(147, 107, 182, 0.8);
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
 
         .zoom-level {
-            color: var(--light);
-            font-size: 0.8rem;
+            color: var(--text-light);
+            font-size: 12px;
             text-align: center;
             margin-top: 4px;
             font-family: 'Roboto Mono', monospace;
-            min-width: 40px;
         }
 
         .empty-state {
@@ -441,21 +240,23 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: var(--gray);
+            color: var(--text-light);
             text-align: center;
-            padding: 40px;
+            padding: 48px;
         }
 
         .empty-state i {
-            font-size: 4rem;
+            font-size: 56px;
             margin-bottom: 20px;
             opacity: 0.5;
+            color: var(--primary);
         }
 
         .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--light);
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text);
+            font-weight: 600;
         }
 
         .loading {
@@ -467,10 +268,10 @@
         }
 
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(47, 190, 182, 0.2);
-            border-top: 4px solid var(--primary);
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(1, 103, 156, 0.1);
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
@@ -481,141 +282,196 @@
             100% { transform: rotate(360deg); }
         }
 
-        footer {
-            text-align: center;
-            padding: 25px 0;
-            color: var(--gray);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(47, 190, 182, 0.1);
-        }
-
-        .api-info {
-            background: rgba(5, 8, 17, 0.5);
-            padding: 12px 20px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.85rem;
-            border-left: 3px solid var(--secondary);
-        }
-
-        .error-message {
-            background: rgba(255, 71, 87, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: none;
-        }
-
-        .examples {
-            margin-top: 20px;
+        .chat-dialog {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 48px);
+            max-width: 1200px;
+            background-color: var(--background);
+            border-radius: 2.4rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            z-index: 1000;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            flex-direction: column;
+            padding: 10px 20px;
+            gap: 6px;
+        }
+
+        .dialog-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dialog-title {
+            margin: 0px 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dialog-title i {
+            font-size: 16px;
+        }
+
+        .examples-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 8px 0;
+            scrollbar-width: thin;
+        }
+
+        .examples-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .examples-container::-webkit-scrollbar-track {
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .examples-container::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px;
         }
 
         .example-btn {
-            background: rgba(47, 190, 182, 0.2);
-            border: 1px solid rgba(47, 190, 182, 0.5);
-            color: var(--light);
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.85rem;
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 16px;
+            border-radius: 1.6rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .example-btn:hover {
-            background: rgba(47, 190, 182, 0.4);
+            background-color: rgba(1, 103, 156, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 10px 15px;
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            resize: none;
+            min-height: 56px;
+            max-height: 85px;
+            transition: all 0.2s;
+            line-height: 1.5;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(1, 103, 156, 0.1);
+        }
+
+        #userInput::placeholder {
+            color: var(--text-light);
+        }
+
+        #generateBtn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        #generateBtn:hover {
+            background-color: #015a8a;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(1, 103, 156, 0.2);
         }
 
-        .graphql-info {
-            background: rgba(229, 53, 171, 0.1);
-            border: 1px solid rgba(229, 53, 171, 0.5);
-            padding: 12px 20px;
-            border-radius: 8px;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--light);
+        #generateBtn:active {
+            transform: translateY(0);
         }
 
-        .graphql-info i {
-            color: #e535ab;
-            margin-right: 8px;
+        #generateBtn:disabled {
+            background-color: var(--border);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .dialog-footer {
+            display: none; /* flex */
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 8px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .error-message {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 14px;
+            border-radius: 1.2rem;
+            font-size: 14px;
+            display: none;
+            margin-top: 4px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="logo_izs.png" alt="IZS Logo" class="logo">
-            </div>
-            <div class="title-section">
-                <h1>BIOINFORMATICS AI ASSISTANT</h1>
-                <p class="subtitle">Automatically generate Nextflow code and Mermaid diagrams from your natural language description.</p>
-            </div>
-        </div>
-
-        <section class="input-section">
-            
-            <div class="input-wrapper">
-                <textarea id="userInput" placeholder="Input your description, for example: Design a sequential bioinformatics workflow for the Covid Emergency pipeline that ..."></textarea>
-            </div>
-            
-            <div class="examples">
-                <button class="example-btn" data-example="Design a sequential bioinformatics workflow for the Covid Emergency pipeline that starts with trimmed FASTQ reads and the SARS-CoV-2 reference genome (NC_045512.2, Wuhan-Hu-1). The pipeline should: 1. Map the reads to the reference and call variants using iVar, producing a consensus FASTA sequence. 2. Pass that consensus FASTA directly to Pangolin to assign a viral lineage. 3. Output the final Pangolin lineage report (CSV) and retain the consensus FASTA.">Covid Emergency</button>
-                <button class="example-btn" data-example="Design a Nextflow workflow for segmented viruses that takes pre-processed FASTQ reads and user-provided reference genomes, maps reads to each reference using iVar, and outputs per-segment consensus FASTA files plus a consolidated multifasta. The workflow should pair each sample with all references using and be structured as a reusable module.">Mapping for Segmented Viruses</button>
-                <button class="example-btn" data-example="Design a Nextflow workflow for a 'Depletion & de novo' pipeline that starts with trimmed FASTQ reads and an optional host reference genome. The workflow first removes host reads using Bowtie, then performs de novo assembly of the depleted (or original, if no host provided) reads with SPAdes. The pipeline supports samples with or without a host reference and emits both the depleted reads and final assemblies.">Depletion and de novo</button>
-                <button class="example-btn" data-example="Design a Nextflow workflow for the 'Genome Draft' pipeline that processes depleted FASTQ reads against a provided reference genome in parallel:1. Run Bowtie2 mapping to produce a coverage-checked consensus FASTA. 2. Simultaneously run iVar-based mapping to generate another consensus FASTA, which is then passed—along with an optional GenBank reference—to Prokka for structural gene annotation (configured for viral genomes). The workflow accepts FASTA reference(s) for mapping and an optional GenBank reference for annotation, and executes both mapping branches concurrently before proceeding to annotation.">Genome Draft</button>
-                <button class="example-btn" data-example="Design a Nextflow DSL2 workflow for the WNV Lineage Calculation and Mapping pipeline that starts with trimmed FASTQ reads and: 1. Determines the West Nile virus lineage using the Westnile tool. 2. Uses the inferred lineage to dynamically select the matching reference genome via getReferenceForLineage. 3. Performs read mapping and variant calling with iVar using the lineage-specific reference. The workflow outputs a consensus sequence (FASTA) and a VCF file, enabling lineage-aware, reference-guided analysis of WNV samples in a fully automated, sequential manner.">West Nile Virus</button>
-                <button class="example-btn" data-example="Design a Nextflow DSL2 workflow for the 'Filtering & de novo' pipeline that starts with trimmed FASTQ reads and a user-provided reference genome: 1. Filters reads using Bowtie to retain only those aligning to the reference. 2. Performs de novo assembly of the filtered reads with SPAdes. The workflow outputs both the filtered reads and the final assembled contigs, enabling reference-guided enrichment followed by assembly.">Filtering and de novo</button>
-                <button class="example-btn" data-example="Design a Nextflow workflow for the 'Typing on Bacteria' pipeline that accepts assembled scaffolds (from de novo assembly) and trimmed reads as inputs and runs parallel analyses: 1. Species identification with KmerFinder. 2. AMR/virulence gene detection using ABRicate and StarAMR. 3. Structural gene annotation via Prokka. 4. Typing:- MLST,- flaA locus typing, - cg/wgMLST using chewBBACA. Optionally, the identified species triggers a Bowtie2 mapping step using the trimmed reads and a species-specific reference to produce a VCF, alignment, and coverage report. The workflow is modular, scalable, and handles bacterial genomes end-to-end—from raw reads to comprehensive characterization.">Typing on Bacteria</button>
-                <button class="example-btn" data-example="I need a bioinformatics workflow designed to process raw sequencing reads. It should start by performing an initial check on the raw input files. For the cleaning and trimming phase, I need the logic to be specific to the data type: please set it up so that it uses Trimmomatic for standard Illumina samples (unless they are bacteria), but switches to fastp if the data is Ion Torrent or if it is a bacterial sample. Once the reads are trimmed, the workflow should check if there is enough data remaining; if there is, pass those clean reads into Kraken to figure out the taxonomy.">Raw Reads</button>
-            </div>
-            
-            <!-- <div class="graphql-info">
-                <i class="fas fa-project-diagram"></i> API：http://193.166.24.117:8080/generate
-            </div> -->
-            
-            <div class="error-message" id="errorMessage">
-                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
-            </div>
-            
-            <div class="button-container">
-                <div class="status-indicator">
-                    <div class="status-dot" id="statusDot"></div>
-                    <span id="statusText">Get ready</span>
-                </div>
-                <button id="generateBtn">
-                    <i class="fas fa-bolt"></i> Generate
-                </button>
-            </div>
-            
-        </section>
-
-        <section class="results-section">
-            <div class="result-card">
-                <div class="result-header">
-                    <div class="result-title">
+    <div class="main-container">
+        <div class="results-container">
+            <div class="result-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
                         <i class="fas fa-code"></i>
-                        <span>Nextflow</span>
+                        <span>Nextflow Code</span>
                     </div>
-                    <div class="status-indicator">
+                    <div class="panel-status">
                         <div class="status-dot" id="nextflowStatus"></div>
-                        <span>Waiting</span>
+                        <span>Ready</span>
                     </div>
                 </div>
-                <div class="result-content">
+                <div class="panel-content">
                     <div class="empty-state" id="nextflowEmpty">
                         <i class="fas fa-file-code"></i>
                         <h3>Nextflow Code</h3>
+                        <p>Generated code will appear here</p>
                     </div>
                     <div class="loading" id="nextflowLoading" style="display: none;">
                         <div class="spinner"></div>
@@ -625,21 +481,22 @@
                 </div>
             </div>
 
-            <div class="result-card">
-                <div class="result-header">
-                    <div class="result-title">
+            <div class="result-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
                         <i class="fas fa-project-diagram"></i>
-                        <span>Mermaid</span>
+                        <span>Mermaid Diagram</span>
                     </div>
-                    <div class="status-indicator">
+                    <div class="panel-status">
                         <div class="status-dot" id="mermaidStatus"></div>
-                        <span>Waiting</span>
+                        <span>Ready</span>
                     </div>
                 </div>
-                <div class="result-content">
+                <div class="panel-content">
                     <div class="empty-state" id="mermaidEmpty">
                         <i class="fas fa-diagram-project"></i>
                         <h3>Mermaid Diagram</h3>
+                        <p>Workflow visualization will appear here</p>
                     </div>
                     <div class="loading" id="mermaidLoading" style="display: none;">
                         <div class="spinner"></div>
@@ -650,18 +507,48 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <footer>
-            <p>© IZS BIOINFORMATICS PLATFORM | EDISS</p>
-        </footer>
+        <div class="chat-dialog">
+            <div class="dialog-header">
+                <div class="examples-container">
+                    <div class="dialog-title">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <button class="example-btn" data-example="Design a sequential bioinformatics workflow for the Covid Emergency pipeline that starts with trimmed FASTQ reads and the SARS-CoV-2 reference genome (NC_045512.2, Wuhan-Hu-1). The pipeline should: 1. Map the reads to the reference and call variants using iVar, producing a consensus FASTA sequence. 2. Pass that consensus FASTA directly to Pangolin to assign a viral lineage. 3. Output the final Pangolin lineage report (CSV) and retain the consensus FASTA.">Covid Emergency</button>
+                    <button class="example-btn" data-example="Design a Nextflow workflow for segmented viruses that takes pre-processed FASTQ reads and user-provided reference genomes, maps reads to each reference using iVar, and outputs per-segment consensus FASTA files plus a consolidated multifasta. The workflow should pair each sample with all references using and be structured as a reusable module.">Mapping for Segmented Viruses</button>
+                    <button class="example-btn" data-example="Design a Nextflow workflow for a 'Depletion & de novo' pipeline that starts with trimmed FASTQ reads and an optional host reference genome. The workflow first removes host reads using Bowtie, then performs de novo assembly of the depleted (or original, if no host provided) reads with SPAdes. The pipeline supports samples with or without a host reference and emits both the depleted reads and final assemblies.">Depletion and de novo</button>
+                    <button class="example-btn" data-example="Design a Nextflow workflow for the 'Genome Draft' pipeline that processes depleted FASTQ reads against a provided reference genome in parallel:1. Run Bowtie2 mapping to produce a coverage-checked consensus FASTA. 2. Simultaneously run iVar-based mapping to generate another consensus FASTA, which is then passed—along with an optional GenBank reference—to Prokka for structural gene annotation (configured for viral genomes). The workflow accepts FASTA reference(s) for mapping and an optional GenBank reference for annotation, and executes both mapping branches concurrently before proceeding to annotation.">Genome Draft</button>
+                    <button class="example-btn" data-example="Design a Nextflow DSL2 workflow for the WNV Lineage Calculation and Mapping pipeline that starts with trimmed FASTQ reads and: 1. Determines the West Nile virus lineage using the Westnile tool. 2. Uses the inferred lineage to dynamically select the matching reference genome via getReferenceForLineage. 3. Performs read mapping and variant calling with iVar using the lineage-specific reference. The workflow outputs a consensus sequence (FASTA) and a VCF file, enabling lineage-aware, reference-guided analysis of WNV samples in a fully automated, sequential manner.">West Nile Virus</button>
+                    <button class="example-btn" data-example="Design a Nextflow DSL2 workflow for the 'Filtering & de novo' pipeline that starts with trimmed FASTQ reads and a user-provided reference genome: 1. Filters reads using Bowtie to retain only those aligning to the reference. 2. Performs de novo assembly of the filtered reads with SPAdes. The workflow outputs both the filtered reads and the final assembled contigs, enabling reference-guided enrichment followed by assembly.">Filtering and de novo</button>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <textarea id="userInput" placeholder="Input your description, for example: Design a sequential bioinformatics workflow for the Covid Emergency pipeline that ..."></textarea>
+                <button id="generateBtn">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+
+            <div class="dialog-footer">
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span id="statusText">Ready</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Initialize Mermaid with custom configuration
+        // Initialize Mermaid with updated configuration
         mermaid.initialize({
             startOnLoad: false,
-            theme: 'dark',
+            theme: 'default',
             flowchart: {
                 useMaxWidth: false,
                 htmlLabels: true,
@@ -669,80 +556,61 @@
             },
             securityLevel: 'loose',
             themeCSS: `
-                /* Keep only the border for mermaid nodes */
                 .node rect, .node circle, .node ellipse, .node polygon, .node path {
-                    fill: transparent !important;
-                    stroke: #2fbeb6 !important;
+                    fill: #ffffff !important;
+                    stroke: #01679c !important;
                     stroke-width: 2px !important;
                 }
                 
-                /* Cluster style */
                 .cluster rect {
-                    fill: transparent !important;
-                    stroke: rgba(47, 190, 182, 0.5) !important;
+                    fill: #f2f2f3 !important;
+                    stroke: #015a8a !important;
                     stroke-width: 1.5px !important;
-                    stroke-dasharray: 5,5 !important;
                 }
                 
-                /* Border style */
                 .edgePath .path {
-                    stroke: #2f6bb6 !important;
+                    stroke: #01679c !important;
                     stroke-width: 2px !important;
                 }
                 
-                /* Arrow style */
                 .arrowheadPath {
-                    fill: #2f6bb6 !important;
-                    stroke: #2f6bb6 !important;
+                    fill: #01679c !important;
+                    stroke: #01679c !important;
                 }
                 
-                /* Label style */
                 .nodeLabel {
-                    color: #e0f7ff !important;
-                    font-family: 'Roboto Mono', monospace !important;
+                    color: #333333 !important;
+                    font-family: 'Inter', sans-serif !important;
                 }
                 
                 .edgeLabel {
-                    background-color: rgba(5, 8, 17, 0.9) !important;
-                    color: #8a8fa3 !important;
-                    font-family: 'Roboto Mono', monospace !important;
-                    border: 1px solid rgba(47, 190, 182, 0.3) !important;
+                    background-color: #ffffff !important;
+                    color: #666666 !important;
+                    font-family: 'Inter', sans-serif !important;
+                    border: 1px solid #e0e0e0 !important;
                     border-radius: 4px !important;
                     padding: 2px 6px !important;
                 }
                 
-                /* Special node style */
                 .node.clickable rect {
                     stroke-width: 3px !important;
                 }
                 
-                /* Start and end node */
                 .node.start rect, .node.end rect {
-                    stroke: #00ff9d !important;
+                    stroke: #10b981 !important;
                 }
                 
-                /* Desicion node */
                 .node.diamond rect {
                     stroke: #e535ab !important;
                 }
                 
-                /* Make sure SVG fulfill the container */
                 svg {
                     width: 100% !important;
                     height: 100% !important;
                     max-width: 100% !important;
                     max-height: 100% !important;
                 }
-            `,
-            themeVariables: {
-                darkMode: true,
-                primaryColor: '#0a0e17',
-                primaryBorderColor: '#2fbeb6',
-                primaryTextColor: '#e0f7ff',
-                lineColor: '#2f6bb6',
-                secondaryColor: '#050811',
-                tertiaryColor: '#050811'
-            }
+            `
         });
 
         // DOM elements
@@ -779,7 +647,7 @@
         let dragStartY = 0;
         let translateX = 0;
         let translateY = 0;
-        let isPanMode = false; // Pan mode or not
+        let isPanMode = false;
 
         // Set status
         function setStatus(type, message) {
@@ -791,7 +659,7 @@
         // Show error
         function showError(message) {
             errorText.textContent = message;
-            errorMessage.style.display = 'flex';
+            errorMessage.style.display = 'block';
             setStatus('error', 'Error');
         }
 
@@ -813,10 +681,10 @@
             
             // Reset status indicators
             nextflowStatus.className = 'status-dot';
-            nextflowStatus.nextElementSibling.textContent = 'Waiting';
+            nextflowStatus.nextElementSibling.textContent = 'Ready';
             
             mermaidStatus.className = 'status-dot';
-            mermaidStatus.nextElementSibling.textContent = 'Waiting';
+            mermaidStatus.nextElementSibling.textContent = 'Ready';
         }
 
         // Show loading state
@@ -917,8 +785,7 @@
 
             // Mouse press
             mermaidContainer.addEventListener('mousedown', (e) => {
-                // Enable dragging only in drag mode or when the space bar is held down
-                if (isPanMode || e.which === 2 || e.which === 1) { // 1: left, 2: middle
+                if (isPanMode || e.which === 2 || e.which === 1) {
                     e.preventDefault();
                     isDragging = true;
                     mermaidContainer.classList.add('dragging');
@@ -1071,13 +938,10 @@
             } catch (err) {
                 console.error('Mermaid rendering error:', err);
                 mermaidDiagram.innerHTML = `
-                    <div style="color: #ff4757; text-align: center; padding: 40px;">
+                    <div style="color: #ef4444; text-align: center; padding: 40px;">
                         <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
                         <h3>Flowchart rendering failed</h3>
                         <p>${err.message}</p>
-                        <p style="margin-top: 20px; font-family: monospace; font-size: 0.8rem; background: rgba(255, 71, 87, 0.1); padding: 10px; border-radius: 5px;">
-                            ${code.substring(0, 200)}...
-                        </p>
                     </div>
                 `;
             }
@@ -1103,8 +967,8 @@
                 } else {
                     renderMermaid(`graph TD
     A[No Mermaid code generated] --> B[Please check API response]
-    style A fill:transparent,stroke:#ff4757,stroke-width:3px
-    style B fill:transparent,stroke:#2fbeb6,stroke-width:2px`);
+    style A fill:#ffffff,stroke:#ef4444,stroke-width:3px
+    style B fill:#ffffff,stroke:#01679c,stroke-width:2px`);
                 }
             } else {
                 setStatus('error', 'API returned error');
@@ -1114,8 +978,8 @@
                 showNextflowCode(`// API returned error status: ${JSON.stringify(data, null, 2)}`);
                 renderMermaid(`graph TD
     A[API returned error] --> B[Status: ${data.status || 'Unknown'}]
-    style A fill:transparent,stroke:#ff4757,stroke-width:3px
-    style B fill:transparent,stroke:#ff4757,stroke-width:2px`);
+    style A fill:#ffffff,stroke:#ef4444,stroke-width:3px
+    style B fill:#ffffff,stroke:#ef4444,stroke-width:2px`);
             }
         }
 
@@ -1175,125 +1039,96 @@
                 setTimeout(() => {
                     const mockData = {
                         status: 'success',
-                        nextflow_code: `// Nextflow workflow example - RNA sequencing analysis
-// Generated based on user input: "${userText.substring(0, 50)}..."
+                        nextflow_code: `nextflow.enable.dsl=2
 
-params {
-    reads = "data/*_{1,2}.fastq.gz"
-    genome = "data/genome.fa"
-    gtf = "data/genes.gtf"
-    outdir = "results"
+// --- IMPORTS ---
+
+include { step_2AS_mapping__ivar } from '../steps/step_2AS_mapping__ivar'
+
+include { step_4TY_lineage__pangolin } from '../steps/step_4TY_lineage__pangolin'
+
+include { extractKey } from '../functions/common.nf'
+
+include { getSingleInput } from '../functions/parameters.nf'
+
+// --- GLOBALS ---
+
+    
+def referenceCode = "NC_045512.2"
+    
+
+    
+def referencePath = "{params.assets_dir}/module_covid_emergency/NC_045512.fasta"
+    
+
+    
+def referenceRiscd = "220308-020220308005121273-2AS_import-external"
+    
+
+// --- INLINE PROCESSES (Custom Scripts) ---
+
+// --- MAIN WORKFLOW MODULE ---
+
+// --- HELPER SUB-WORKFLOWS ---
+
+// --- MAIN WORKFLOW MODULE ---
+
+workflow module_covid_emergency {
+    
+    take: 
+        
+        trimmed
+        
+    
+
+    main:
+
+        trimmed.multiMap {
+            trimmed: it
+            reference: [ referenceRiscd, referenceCode, file(referencePath) ]
+            
+        } .set { trAndRef }
+
+        ivar_out = step_2AS_mapping__ivar(trAndRef.trimmed, trAndRef.reference)
+
+        step_4TY_lineage__pangolin(ivar_out.consensus)
+
+    
 }
 
-process FASTQ_QC {
-    tag "\${sample}"
-    
-    input:
-    tuple val(sample), path(reads)
-    
-    output:
-    path("*.html"), emit: qc_html
-    path("*.zip"), emit: qc_zip
-    
-    script:
-    """
-    fastqc -t 4 \${reads} -o .
-    """
-}
-
-process ALIGN_STAR {
-    tag "\${sample}"
-    
-    input:
-    tuple val(sample), path(reads)
-    path genome
-    path gtf
-    
-    output:
-    path("\${sample}.bam"), emit: bam
-    path("\${sample}.log"), emit: log
-    
-    script:
-    """
-    STAR --genomeDir index \\
-         --readFilesIn \${reads} \\
-         --runThreadN 8 \\
-         --outFileNamePrefix \${sample} \\
-         --outSAMtype BAM SortedByCoordinate \\
-         --quantMode GeneCounts
-    """
-}
-
-process QUANT_FEATURECOUNTS {
-    tag "\${sample}"
-    
-    input:
-    path bam
-    path gtf
-    
-    output:
-    path("\${sample}.counts.txt"), emit: counts
-    
-    script:
-    """
-    featureCounts -T 4 -a \${gtf} -o counts.txt \${bam}
-    """
-}
-
+// --- ENTRYPOINT WORKFLOW ---
 workflow {
-    Channel.fromFilePairs(params.reads)
-        .set { read_pairs }
-    
-    read_pairs
-        | FASTQ_QC
-    
-    read_pairs
-        | ALIGN_STAR(params.genome, params.gtf)
-        | QUANT_FEATURECOUNTS(params.gtf)
-}
 
-// Workflow completed`,
-                        mermaid_code: `graph TD
-    A[Start] --> B[Parameter settings]
-    B --> C[Read FASTQ files]
-    C --> D[Quality control]
-    D --> E[FASTQC report]
-    C --> F[STAR alignment]
-    F --> G[BAM files]
-    G --> H[Gene counting]
-    H --> I[Expression matrix]
-    I --> J[Differential expression analysis]
-    J --> K[Result visualization]
-    K --> L[End]
-    
-    subgraph "Input parameters"
-        B
+    module_covid_emergency(getSingleInput())
+
+}`,
+                        mermaid_code: `flowchart TD
+    classDef process fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef subworkflow fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef operator fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef data fill:#e0e0e0,stroke:#333,stroke-width:2px;
+    classDef global fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px;
+    Var_trimmed(["trimmed"]):::data
+    subgraph main_scope ["Main Workflow"]
+    direction TB
+    op_trimmed_0{{"multiMap"}}:::operator
+    Var_trimmed --> op_trimmed_0
+    Glob_referenceRiscd -.-> op_trimmed_0
+    Glob_referenceCode -.-> op_trimmed_0
+    Glob_referencePath -.-> op_trimmed_0
+    Var_trAndRef_op_trimmed_0(("trAndRef")):::data
+    op_trimmed_0 --> Var_trAndRef_op_trimmed_0
+    proc_step_2AS_mapping__ivar["step_2AS_mapping__ivar"]:::process
+    Var_trAndRef_op_trimmed_0 -- ".trimmed" --> proc_step_2AS_mapping__ivar
+    Var_trAndRef_op_trimmed_0 -- ".reference" --> proc_step_2AS_mapping__ivar
+    Var_ivar_out_proc_step_2AS_mapping__ivar(("ivar_out")):::data
+    proc_step_2AS_mapping__ivar --> Var_ivar_out_proc_step_2AS_mapping__ivar
+    node_cae3db["step_4TY_lineage__pangolin"]:::process
+    Var_ivar_out_proc_step_2AS_mapping__ivar -- ".consensus" --> node_cae3db
     end
-    
-    subgraph "Quality control module"
-        D
-        E
-    end
-    
-    subgraph "Alignment and quantification module"
-        F
-        G
-        H
-        I
-    end
-    
-    subgraph "Analysis module"
-        J
-        K
-    end
-    
-    style A fill:transparent,stroke:#2fbeb6,stroke-width:3px
-    style L fill:transparent,stroke:#00ff9d,stroke-width:3px
-    style B fill:transparent,stroke:#2f6bb6,stroke-width:2px
-    style D fill:transparent,stroke:#2fbeb6,stroke-width:2px
-    style F fill:transparent,stroke:#2fbeb6,stroke-width:2px
-    style H fill:transparent,stroke:#2fbeb6,stroke-width:2px
-    style J fill:transparent,stroke:#2fbeb6,stroke-width:2px`
+    subgraph entrypoint_scope ["Entrypoint"]
+    proc_module_covid_emergency["module_covid_emergency"]:::process
+    end`
                     };
                     handleApiResponse(mockData);
                 }, 1500);
@@ -1305,7 +1140,7 @@ workflow {
             const text = userInput.value.trim();
             
             if (!text) {
-                showError('Please enter a natural language description');
+                showError('Please enter a workflow description');
                 return;
             }
             
@@ -1319,14 +1154,31 @@ workflow {
                 const exampleText = btn.getAttribute('data-example');
                 userInput.value = exampleText;
                 userInput.focus();
+                
+                // Auto-resize textarea
+                userInput.style.height = 'auto';
+                userInput.style.height = userInput.scrollHeight + 'px';
             });
         });
 
         // Input box Enter key (Ctrl+Enter) to send
         userInput.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
                 generateBtn.click();
             }
+            
+            // Auto-resize textarea
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                generateBtn.click();
+            }
+        });
+
+        // Auto-resize textarea on input
+        userInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 150) + 'px';
         });
 
         document.addEventListener('keydown', handleKeyboardShortcuts);
@@ -1337,7 +1189,7 @@ workflow {
         
         // Display some initial content when page loads
         window.addEventListener('load', () => {
-            console.log('IZS AI workflow generator loaded, using GraphQL format');
+            console.log('IZS AI workflow generator loaded');
         });
     </script>
 </body>
