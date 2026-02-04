@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IZS BIOINFORMATICS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2fbeb6; /* IZS color*/
+            --primary-dark: #1e8d87;
+            --primary-light: #5fd6cf;
+            --secondary: #2f6bb6;
+            --dark: #0a0e17;
+            --darker: #050811;
+            --light: #e0f7ff;
+            --gray: #8a8fa3;
+            --success: #00ff9d;
+            --error: #ff4757;
+            --card-bg: rgba(16, 23, 41, 0.8);
+            --border-glow: rgba(47, 190, 182, 0.3);
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(47, 190, 182, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(47, 190, 182, 0.1) 0%, transparent 20%),
+                linear-gradient(to bottom, var(--darker), var(--dark));
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(47, 190, 182, 0.2);
+            position: relative;
+            gap: 30px;
+        }
+
+        .header-container::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(47, 190, 182, 0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(47, 190, 182, 0.6));
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .title-section {
+            flex: 1;
+            text-align: left;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px rgba(47, 190, 182, 0.3);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--gray);
+            max-width: 1200px;
+            line-height: 1.6;
+        }
+
+        .input-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 25px rgba(47, 190, 182, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .input-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .input-label i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 18px 20px;
+            background: rgba(5, 8, 17, 0.7);
+            border: 1px solid rgba(47, 190, 182, 0.3);
+            border-radius: 8px;
+            color: var(--light);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(47, 190, 182, 0.2);
+        }
+
+        #userInput::placeholder {
+            color: var(--gray);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #generateBtn {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: var(--darker);
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+
+        #generateBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(47, 190, 182, 0.4);
+        }
+
+        #generateBtn:active {
+            transform: translateY(-1px);
+        }
+
+        #generateBtn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--gray);
+        }
+
+        .status-dot.active {
+            background-color: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .status-dot.error {
+            background-color: var(--error);
+            box-shadow: 0 0 10px var(--error);
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .results-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 0;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 25px rgba(47, 190, 182, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .result-header {
+            padding: 20px 25px;
+            background: rgba(5, 8, 17, 0.7);
+            border-bottom: 1px solid rgba(47, 190, 182, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .result-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+        }
+
+        .result-title i {
+            font-size: 1.3rem;
+        }
+
+        .result-content {
+            flex: 1;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #nextflowCode {
+            width: 100%;
+            height: 100%;
+            padding: 25px;
+            background: rgba(5, 8, 17, 0.5);
+            color: var(--light);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre;
+            overflow: auto;
+            border: none;
+            resize: none;
+        }
+
+        #mermaidContainer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(5, 8, 17, 0.3);
+            position: relative;
+            cursor: grab;
+        }
+
+        #mermaidContainer.dragging {
+            cursor: grabbing;
+            user-select: none;
+        }
+
+        /* Mermaid adaptive containers */
+        #mermaidDiagram {
+            width: 100%;
+            height: 100%;
+            min-width: 100%;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: visible;
+        }
+
+        /* make sure Mermaid SVG fulfill the container */
+        #mermaidDiagram svg {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        /* toolbar */
+        .zoom-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(5, 8, 17, 0.85);
+            border-radius: 8px;
+            padding: 8px;
+            border: 1px solid rgba(47, 190, 182, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .zoom-btn {
+            background: rgba(47, 190, 182, 0.2);
+            border: 1px solid rgba(47, 190, 182, 0.5);
+            color: var(--light);
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(47, 190, 182, 0.4);
+            transform: scale(1.1);
+        }
+
+        .zoom-btn:active {
+            transform: scale(0.95);
+        }
+
+        .zoom-btn.reset {
+            background: rgba(47, 107, 182, 0.2);
+            border-color: rgba(47, 107, 182, 0.5);
+        }
+
+        .zoom-btn.reset:hover {
+            background: rgba(47, 107, 182, 0.4);
+        }
+
+        .zoom-btn.pan {
+            background: rgba(147, 107, 182, 0.2);
+            border-color: rgba(147, 107, 182, 0.5);
+        }
+
+        .zoom-btn.pan:hover {
+            background: rgba(147, 107, 182, 0.4);
+        }
+
+        .zoom-btn.pan.active {
+            background: rgba(147, 107, 182, 0.6);
+            border-color: rgba(147, 107, 182, 0.8);
+        }
+
+        .zoom-level {
+            color: var(--light);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 4px;
+            font-family: 'Roboto Mono', monospace;
+            min-width: 40px;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray);
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(47, 190, 182, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(47, 190, 182, 0.1);
+        }
+
+        .api-info {
+            background: rgba(5, 8, 17, 0.5);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .error-message {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .examples {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .example-btn {
+            background: rgba(47, 190, 182, 0.2);
+            border: 1px solid rgba(47, 190, 182, 0.5);
+            color: var(--light);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .example-btn:hover {
+            background: rgba(47, 190, 182, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .graphql-info {
+            background: rgba(229, 53, 171, 0.1);
+            border: 1px solid rgba(229, 53, 171, 0.5);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--light);
+        }
+
+        .graphql-info i {
+            color: #e535ab;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="logo_izs.png" alt="IZS Logo" class="logo">
+            </div>
+            <div class="title-section">
+                <h1>BIOINFORMATICS AI ASSISTANT</h1>
+                <p class="subtitle">Automatically generate Nextflow code and Mermaid diagrams from your natural language description.</p>
+            </div>
+        </div>
+
+        <section class="input-section">
+            
+            <div class="input-wrapper">
+                <textarea id="userInput" placeholder="Input your description, for example: Design a sequential bioinformatics workflow for the Covid Emergency pipeline that ..."></textarea>
+            </div>
+            
+            <div class="examples">
+                <button class="example-btn" data-example="Design a sequential bioinformatics workflow for the Covid Emergency pipeline that starts with trimmed FASTQ reads and the SARS-CoV-2 reference genome (NC_045512.2, Wuhan-Hu-1). The pipeline should: 1. Map the reads to the reference and call variants using iVar, producing a consensus FASTA sequence. 2. Pass that consensus FASTA directly to Pangolin to assign a viral lineage. 3. Output the final Pangolin lineage report (CSV) and retain the consensus FASTA.">Covid Emergency</button>
+                <button class="example-btn" data-example="Design a Nextflow workflow for segmented viruses that takes pre-processed FASTQ reads and user-provided reference genomes, maps reads to each reference using iVar, and outputs per-segment consensus FASTA files plus a consolidated multifasta. The workflow should pair each sample with all references using and be structured as a reusable module.">Mapping for Segmented Viruses</button>
+                <button class="example-btn" data-example="Design a Nextflow workflow for a 'Depletion & de novo' pipeline that starts with trimmed FASTQ reads and an optional host reference genome. The workflow first removes host reads using Bowtie, then performs de novo assembly of the depleted (or original, if no host provided) reads with SPAdes. The pipeline supports samples with or without a host reference and emits both the depleted reads and final assemblies.">Depletion and de novo</button>
+                <button class="example-btn" data-example="Design a Nextflow workflow for the 'Genome Draft' pipeline that processes depleted FASTQ reads against a provided reference genome in parallel:1. Run Bowtie2 mapping to produce a coverage-checked consensus FASTA. 2. Simultaneously run iVar-based mapping to generate another consensus FASTA, which is then passed—along with an optional GenBank reference—to Prokka for structural gene annotation (configured for viral genomes). The workflow accepts FASTA reference(s) for mapping and an optional GenBank reference for annotation, and executes both mapping branches concurrently before proceeding to annotation.">Genome Draft</button>
+                <button class="example-btn" data-example="Design a Nextflow DSL2 workflow for the WNV Lineage Calculation and Mapping pipeline that starts with trimmed FASTQ reads and: 1. Determines the West Nile virus lineage using the Westnile tool. 2. Uses the inferred lineage to dynamically select the matching reference genome via getReferenceForLineage. 3. Performs read mapping and variant calling with iVar using the lineage-specific reference. The workflow outputs a consensus sequence (FASTA) and a VCF file, enabling lineage-aware, reference-guided analysis of WNV samples in a fully automated, sequential manner.">West Nile Virus</button>
+                <button class="example-btn" data-example="Design a Nextflow DSL2 workflow for the 'Filtering & de novo' pipeline that starts with trimmed FASTQ reads and a user-provided reference genome: 1. Filters reads using Bowtie to retain only those aligning to the reference. 2. Performs de novo assembly of the filtered reads with SPAdes. The workflow outputs both the filtered reads and the final assembled contigs, enabling reference-guided enrichment followed by assembly.">Filtering and de novo</button>
+                <button class="example-btn" data-example="Design a Nextflow workflow for the 'Typing on Bacteria' pipeline that accepts assembled scaffolds (from de novo assembly) and trimmed reads as inputs and runs parallel analyses: 1. Species identification with KmerFinder. 2. AMR/virulence gene detection using ABRicate and StarAMR. 3. Structural gene annotation via Prokka. 4. Typing:- MLST,- flaA locus typing, - cg/wgMLST using chewBBACA. Optionally, the identified species triggers a Bowtie2 mapping step using the trimmed reads and a species-specific reference to produce a VCF, alignment, and coverage report. The workflow is modular, scalable, and handles bacterial genomes end-to-end—from raw reads to comprehensive characterization.">Typing on Bacteria</button>
+                <button class="example-btn" data-example="I need a bioinformatics workflow designed to process raw sequencing reads. It should start by performing an initial check on the raw input files. For the cleaning and trimming phase, I need the logic to be specific to the data type: please set it up so that it uses Trimmomatic for standard Illumina samples (unless they are bacteria), but switches to fastp if the data is Ion Torrent or if it is a bacterial sample. Once the reads are trimmed, the workflow should check if there is enough data remaining; if there is, pass those clean reads into Kraken to figure out the taxonomy.">Raw Reads</button>
+            </div>
+            
+            <!-- <div class="graphql-info">
+                <i class="fas fa-project-diagram"></i> API：http://193.166.24.117:8080/generate
+            </div> -->
+            
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+            
+            <div class="button-container">
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span id="statusText">Get ready</span>
+                </div>
+                <button id="generateBtn">
+                    <i class="fas fa-bolt"></i> Generate
+                </button>
+            </div>
+            
+        </section>
+
+        <section class="results-section">
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-title">
+                        <i class="fas fa-code"></i>
+                        <span>Nextflow</span>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot" id="nextflowStatus"></div>
+                        <span>Waiting</span>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <div class="empty-state" id="nextflowEmpty">
+                        <i class="fas fa-file-code"></i>
+                        <h3>Nextflow Code</h3>
+                    </div>
+                    <div class="loading" id="nextflowLoading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Generating Nextflow Code...</p>
+                    </div>
+                    <textarea id="nextflowCode" readonly style="display: none;"></textarea>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-title">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Mermaid</span>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot" id="mermaidStatus"></div>
+                        <span>Waiting</span>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <div class="empty-state" id="mermaidEmpty">
+                        <i class="fas fa-diagram-project"></i>
+                        <h3>Mermaid Diagram</h3>
+                    </div>
+                    <div class="loading" id="mermaidLoading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Generating Mermaid...</p>
+                    </div>
+                    <div id="mermaidContainer" style="display: none;">
+                        <div id="mermaidDiagram"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© IZS BIOINFORMATICS PLATFORM | EDISS</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Mermaid with custom configuration
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            securityLevel: 'loose',
+            themeCSS: `
+                /* Keep only the border for mermaid nodes */
+                .node rect, .node circle, .node ellipse, .node polygon, .node path {
+                    fill: transparent !important;
+                    stroke: #2fbeb6 !important;
+                    stroke-width: 2px !important;
+                }
+                
+                /* Cluster style */
+                .cluster rect {
+                    fill: transparent !important;
+                    stroke: rgba(47, 190, 182, 0.5) !important;
+                    stroke-width: 1.5px !important;
+                    stroke-dasharray: 5,5 !important;
+                }
+                
+                /* Border style */
+                .edgePath .path {
+                    stroke: #2f6bb6 !important;
+                    stroke-width: 2px !important;
+                }
+                
+                /* Arrow style */
+                .arrowheadPath {
+                    fill: #2f6bb6 !important;
+                    stroke: #2f6bb6 !important;
+                }
+                
+                /* Label style */
+                .nodeLabel {
+                    color: #e0f7ff !important;
+                    font-family: 'Roboto Mono', monospace !important;
+                }
+                
+                .edgeLabel {
+                    background-color: rgba(5, 8, 17, 0.9) !important;
+                    color: #8a8fa3 !important;
+                    font-family: 'Roboto Mono', monospace !important;
+                    border: 1px solid rgba(47, 190, 182, 0.3) !important;
+                    border-radius: 4px !important;
+                    padding: 2px 6px !important;
+                }
+                
+                /* Special node style */
+                .node.clickable rect {
+                    stroke-width: 3px !important;
+                }
+                
+                /* Start and end node */
+                .node.start rect, .node.end rect {
+                    stroke: #00ff9d !important;
+                }
+                
+                /* Desicion node */
+                .node.diamond rect {
+                    stroke: #e535ab !important;
+                }
+                
+                /* Make sure SVG fulfill the container */
+                svg {
+                    width: 100% !important;
+                    height: 100% !important;
+                    max-width: 100% !important;
+                    max-height: 100% !important;
+                }
+            `,
+            themeVariables: {
+                darkMode: true,
+                primaryColor: '#0a0e17',
+                primaryBorderColor: '#2fbeb6',
+                primaryTextColor: '#e0f7ff',
+                lineColor: '#2f6bb6',
+                secondaryColor: '#050811',
+                tertiaryColor: '#050811'
+            }
+        });
+
+        // DOM elements
+        const userInput = document.getElementById('userInput');
+        const generateBtn = document.getElementById('generateBtn');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        
+        const nextflowEmpty = document.getElementById('nextflowEmpty');
+        const nextflowLoading = document.getElementById('nextflowLoading');
+        const nextflowCode = document.getElementById('nextflowCode');
+        const nextflowStatus = document.getElementById('nextflowStatus');
+        
+        const mermaidEmpty = document.getElementById('mermaidEmpty');
+        const mermaidLoading = document.getElementById('mermaidLoading');
+        const mermaidContainer = document.getElementById('mermaidContainer');
+        const mermaidDiagram = document.getElementById('mermaidDiagram');
+        const mermaidStatus = document.getElementById('mermaidStatus');
+        
+        const exampleBtns = document.querySelectorAll('.example-btn');
+        const apiUrl = 'http://193.166.24.117:8080/generate';
+
+        // Drag and scale related variables
+        let currentScale = 1;
+        const MIN_SCALE = 0.2;
+        const MAX_SCALE = 3;
+        const SCALE_STEP = 0.2;
+        
+        // Drag related variables
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let translateX = 0;
+        let translateY = 0;
+        let isPanMode = false; // Pan mode or not
+
+        // Set status
+        function setStatus(type, message) {
+            statusDot.className = 'status-dot';
+            statusDot.classList.add(type);
+            statusText.textContent = message;
+        }
+
+        // Show error
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.style.display = 'flex';
+            setStatus('error', 'Error');
+        }
+
+        // Hide error
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+
+        // Reset result areas
+        function resetResults() {
+            // Hide all content
+            nextflowEmpty.style.display = 'none';
+            nextflowLoading.style.display = 'none';
+            nextflowCode.style.display = 'none';
+            
+            mermaidEmpty.style.display = 'none';
+            mermaidLoading.style.display = 'none';
+            mermaidContainer.style.display = 'none';
+            
+            // Reset status indicators
+            nextflowStatus.className = 'status-dot';
+            nextflowStatus.nextElementSibling.textContent = 'Waiting';
+            
+            mermaidStatus.className = 'status-dot';
+            mermaidStatus.nextElementSibling.textContent = 'Waiting';
+        }
+
+        // Show loading state
+        function showLoading() {
+            resetResults();
+            
+            nextflowLoading.style.display = 'flex';
+            mermaidLoading.style.display = 'flex';
+            
+            nextflowStatus.className = 'status-dot active';
+            nextflowStatus.nextElementSibling.textContent = 'Generating...';
+            
+            mermaidStatus.className = 'status-dot active';
+            mermaidStatus.nextElementSibling.textContent = 'Generating...';
+        }
+
+        // Show Nextflow code
+        function showNextflowCode(code) {
+            nextflowLoading.style.display = 'none';
+            nextflowCode.textContent = code;
+            nextflowCode.style.display = 'block';
+            nextflowStatus.className = 'status-dot active';
+            nextflowStatus.nextElementSibling.textContent = 'Generated';
+            
+            // Auto scroll to top
+            nextflowCode.scrollTop = 0;
+        }
+
+        // Generate scale toolbar
+        function createZoomControls() {
+            const zoomControls = document.createElement('div');
+            zoomControls.className = 'zoom-controls';
+            
+            // Drag
+            const panBtn = document.createElement('button');
+            panBtn.className = 'zoom-btn pan';
+            panBtn.innerHTML = '<i class="fas fa-hand-paper"></i>';
+            panBtn.title = 'Drag and drop mode (spacebar)';
+            panBtn.addEventListener('click', togglePanMode);
+            
+            // Zoom in
+            const zoomInBtn = document.createElement('button');
+            zoomInBtn.className = 'zoom-btn';
+            zoomInBtn.innerHTML = '<i class="fas fa-search-plus"></i>';
+            zoomInBtn.title = 'Zoom in (Ctrl + +)';
+            zoomInBtn.addEventListener('click', () => zoomChart(SCALE_STEP));
+            
+            // Zoom out
+            const zoomOutBtn = document.createElement('button');
+            zoomOutBtn.className = 'zoom-btn';
+            zoomOutBtn.innerHTML = '<i class="fas fa-search-minus"></i>';
+            zoomOutBtn.title = 'Zoom out (Ctrl + -)';
+            zoomOutBtn.addEventListener('click', () => zoomChart(-SCALE_STEP));
+            
+            // Reset
+            const resetBtn = document.createElement('button');
+            resetBtn.className = 'zoom-btn reset';
+            resetBtn.innerHTML = '<i class="fas fa-expand-alt"></i>';
+            resetBtn.title = 'Reset (Ctrl + 0)';
+            resetBtn.addEventListener('click', resetView);
+            
+            // Zoom level
+            const zoomLevel = document.createElement('div');
+            zoomLevel.className = 'zoom-level';
+            zoomLevel.id = 'zoomLevel';
+            zoomLevel.textContent = '100%';
+            
+            zoomControls.appendChild(panBtn);
+            zoomControls.appendChild(zoomInBtn);
+            zoomControls.appendChild(zoomOutBtn);
+            zoomControls.appendChild(resetBtn);
+            zoomControls.appendChild(zoomLevel);
+            
+            return zoomControls;
+        }
+
+        // Drag mode
+        function togglePanMode() {
+            isPanMode = !isPanMode;
+            const panBtn = document.querySelector('.zoom-btn.pan');
+            if (panBtn) {
+                if (isPanMode) {
+                    panBtn.classList.add('active');
+                    panBtn.title = 'Drag mode on (spacebar) - Click to turn off';
+                    mermaidContainer.style.cursor = 'grab';
+                } else {
+                    panBtn.classList.remove('active');
+                    panBtn.title = 'Drag mode off (spacebar) - Click to turn on';
+                    mermaidContainer.style.cursor = 'default';
+                }
+            }
+        }
+
+        // Initialize dragging 
+        function initDragEvents() {
+            const svgElement = mermaidDiagram.querySelector('svg');
+            if (!svgElement) return;
+
+            // Mouse press
+            mermaidContainer.addEventListener('mousedown', (e) => {
+                // Enable dragging only in drag mode or when the space bar is held down
+                if (isPanMode || e.which === 2 || e.which === 1) { // 1: left, 2: middle
+                    e.preventDefault();
+                    isDragging = true;
+                    mermaidContainer.classList.add('dragging');
+                    dragStartX = e.clientX - translateX;
+                    dragStartY = e.clientY - translateY;
+                }
+            });
+
+            mermaidContainer.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                e.preventDefault();
+                
+                translateX = e.clientX - dragStartX;
+                translateY = e.clientY - dragStartY;
+                
+                applyTransform();
+            });
+
+            mermaidContainer.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    mermaidContainer.classList.remove('dragging');
+                }
+            });
+
+            mermaidContainer.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    mermaidContainer.classList.remove('dragging');
+                }
+            });
+
+            mermaidContainer.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            });
+        }
+
+        function applyTransform() {
+            const svgElement = mermaidDiagram.querySelector('svg');
+            if (!svgElement) return;
+            
+            svgElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+            svgElement.style.transformOrigin = 'center center';
+            
+            updateZoomLevel();
+        }
+
+        // Zoom chart
+        function zoomChart(delta) {
+            const svgElement = mermaidDiagram.querySelector('svg');
+            if (!svgElement) return;
+            
+            let newScale = currentScale + delta;
+            
+            if (newScale < MIN_SCALE) newScale = MIN_SCALE;
+            if (newScale > MAX_SCALE) newScale = MAX_SCALE;
+            
+            currentScale = newScale;
+            applyTransform();
+        }
+
+        // Reset view (zoom and pan)
+        function resetView() {
+            const svgElement = mermaidDiagram.querySelector('svg');
+            if (!svgElement) return;
+            
+            currentScale = 1;
+            translateX = 0;
+            translateY = 0;
+            applyTransform();
+        }
+
+        // Update zoom level display
+        function updateZoomLevel() {
+            const zoomLevelElement = document.getElementById('zoomLevel');
+            if (zoomLevelElement) {
+                zoomLevelElement.textContent = `${Math.round(currentScale * 100)}%`;
+            }
+        }
+
+        // Handling keyboard shortcuts
+        function handleKeyboardShortcuts(e) {
+            
+            if (!mermaidContainer.style.display || mermaidContainer.style.display === 'none') {
+                return;
+            }
+            
+            if (e.key === ' ') {
+                e.preventDefault();
+                togglePanMode();
+            }
+            
+            else if (e.ctrlKey && (e.key === '+' || e.key === '=')) {
+                e.preventDefault();
+                zoomChart(SCALE_STEP);
+            }
+            
+            else if (e.ctrlKey && e.key === '-') {
+                e.preventDefault();
+                zoomChart(-SCALE_STEP);
+            }
+            
+            else if (e.ctrlKey && e.key === '0') {
+                e.preventDefault();
+                resetView();
+            }
+        }
+
+        // Render Mermaid diagram with enhanced styling
+        function renderMermaid(code) {
+            mermaidLoading.style.display = 'none';
+            mermaidContainer.style.display = 'flex';
+            mermaidStatus.className = 'status-dot active';
+            mermaidStatus.nextElementSibling.textContent = 'Generated';
+            
+            mermaidDiagram.innerHTML = '';
+            
+            const oldZoomControls = mermaidDiagram.querySelector('.zoom-controls');
+            if (oldZoomControls) {
+                oldZoomControls.remove();
+            }
+            
+            try {
+                
+                mermaidDiagram.innerHTML = `<div class="mermaid">${code}</div>`;
+                
+                mermaid.init(undefined, mermaidDiagram.querySelector('.mermaid'));
+                
+                setTimeout(() => {
+                    const svgElement = mermaidDiagram.querySelector('svg');
+                    if (svgElement) {
+                        
+                        const zoomControls = createZoomControls();
+                        mermaidDiagram.appendChild(zoomControls);
+                        
+                        resetView();
+                        
+                        initDragEvents();
+                        
+                        mermaidContainer.addEventListener('wheel', (e) => {
+                            if (e.ctrlKey) {
+                                e.preventDefault();
+                                const delta = e.deltaY > 0 ? -SCALE_STEP/2 : SCALE_STEP/2;
+                                zoomChart(delta);
+                            }
+                        });
+                    }
+                }, 100);
+            } catch (err) {
+                console.error('Mermaid rendering error:', err);
+                mermaidDiagram.innerHTML = `
+                    <div style="color: #ff4757; text-align: center; padding: 40px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>Flowchart rendering failed</h3>
+                        <p>${err.message}</p>
+                        <p style="margin-top: 20px; font-family: monospace; font-size: 0.8rem; background: rgba(255, 71, 87, 0.1); padding: 10px; border-radius: 5px;">
+                            ${code.substring(0, 200)}...
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // Handle API response
+        function handleApiResponse(data) {
+            hideError();
+            
+            if (data.status === 'success') {
+                setStatus('active', 'Generation successful');
+                
+                // Show Nextflow code
+                if (data.nextflow_code) {
+                    showNextflowCode(data.nextflow_code);
+                } else {
+                    showNextflowCode('// Nextflow code not generated');
+                }
+                
+                // Show Mermaid diagram
+                if (data.mermaid_code) {
+                    renderMermaid(data.mermaid_code);
+                } else {
+                    renderMermaid(`graph TD
+    A[No Mermaid code generated] --> B[Please check API response]
+    style A fill:transparent,stroke:#ff4757,stroke-width:3px
+    style B fill:transparent,stroke:#2fbeb6,stroke-width:2px`);
+                }
+            } else {
+                setStatus('error', 'API returned error');
+                showError(`API returned status: ${data.status || 'Unknown error'}`);
+                
+                // Show error placeholder
+                showNextflowCode(`// API returned error status: ${JSON.stringify(data, null, 2)}`);
+                renderMermaid(`graph TD
+    A[API returned error] --> B[Status: ${data.status || 'Unknown'}]
+    style A fill:transparent,stroke:#ff4757,stroke-width:3px
+    style B fill:transparent,stroke:#ff4757,stroke-width:2px`);
+            }
+        }
+
+        // Call API - using GraphQL format
+        async function callApi(userText) {
+            try {
+                setStatus('active', 'Calling API...');
+                showLoading();
+                
+                // Build GraphQL query
+                const graphqlQuery = {
+                    query: userText,
+                };
+
+                console.log('Sending GraphQL request:', JSON.stringify(graphqlQuery, null, 2));
+                
+                let response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(graphqlQuery)
+                });
+                
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('API response:', data);
+                
+                // Check GraphQL response structure
+                if (data.errors) {
+                    throw new Error(`GraphQL error: ${JSON.stringify(data.errors)}`);
+                }
+                
+                // Extract data - adjust according to GraphQL response structure
+                let resultData;
+                if (data.data && data.data.generate) {
+                    resultData = data.data.generate;
+                } else if (data.status) {
+                    // Directly returned the required data structure
+                    resultData = data;
+                } else {
+                    throw new Error('Unable to parse API response structure');
+                }
+                
+                handleApiResponse(resultData);
+                
+            } catch (error) {
+                console.error('API call error:', error);
+                setStatus('error', 'API call failed');
+                showError(`API call failed: ${error.message}`);
+                
+                // Show mock data for demonstration
+                setTimeout(() => {
+                    const mockData = {
+                        status: 'success',
+                        nextflow_code: `// Nextflow workflow example - RNA sequencing analysis
+// Generated based on user input: "${userText.substring(0, 50)}..."
+
+params {
+    reads = "data/*_{1,2}.fastq.gz"
+    genome = "data/genome.fa"
+    gtf = "data/genes.gtf"
+    outdir = "results"
+}
+
+process FASTQ_QC {
+    tag "\${sample}"
+    
+    input:
+    tuple val(sample), path(reads)
+    
+    output:
+    path("*.html"), emit: qc_html
+    path("*.zip"), emit: qc_zip
+    
+    script:
+    """
+    fastqc -t 4 \${reads} -o .
+    """
+}
+
+process ALIGN_STAR {
+    tag "\${sample}"
+    
+    input:
+    tuple val(sample), path(reads)
+    path genome
+    path gtf
+    
+    output:
+    path("\${sample}.bam"), emit: bam
+    path("\${sample}.log"), emit: log
+    
+    script:
+    """
+    STAR --genomeDir index \\
+         --readFilesIn \${reads} \\
+         --runThreadN 8 \\
+         --outFileNamePrefix \${sample} \\
+         --outSAMtype BAM SortedByCoordinate \\
+         --quantMode GeneCounts
+    """
+}
+
+process QUANT_FEATURECOUNTS {
+    tag "\${sample}"
+    
+    input:
+    path bam
+    path gtf
+    
+    output:
+    path("\${sample}.counts.txt"), emit: counts
+    
+    script:
+    """
+    featureCounts -T 4 -a \${gtf} -o counts.txt \${bam}
+    """
+}
+
+workflow {
+    Channel.fromFilePairs(params.reads)
+        .set { read_pairs }
+    
+    read_pairs
+        | FASTQ_QC
+    
+    read_pairs
+        | ALIGN_STAR(params.genome, params.gtf)
+        | QUANT_FEATURECOUNTS(params.gtf)
+}
+
+// Workflow completed`,
+                        mermaid_code: `graph TD
+    A[Start] --> B[Parameter settings]
+    B --> C[Read FASTQ files]
+    C --> D[Quality control]
+    D --> E[FASTQC report]
+    C --> F[STAR alignment]
+    F --> G[BAM files]
+    G --> H[Gene counting]
+    H --> I[Expression matrix]
+    I --> J[Differential expression analysis]
+    J --> K[Result visualization]
+    K --> L[End]
+    
+    subgraph "Input parameters"
+        B
+    end
+    
+    subgraph "Quality control module"
+        D
+        E
+    end
+    
+    subgraph "Alignment and quantification module"
+        F
+        G
+        H
+        I
+    end
+    
+    subgraph "Analysis module"
+        J
+        K
+    end
+    
+    style A fill:transparent,stroke:#2fbeb6,stroke-width:3px
+    style L fill:transparent,stroke:#00ff9d,stroke-width:3px
+    style B fill:transparent,stroke:#2f6bb6,stroke-width:2px
+    style D fill:transparent,stroke:#2fbeb6,stroke-width:2px
+    style F fill:transparent,stroke:#2fbeb6,stroke-width:2px
+    style H fill:transparent,stroke:#2fbeb6,stroke-width:2px
+    style J fill:transparent,stroke:#2fbeb6,stroke-width:2px`
+                    };
+                    handleApiResponse(mockData);
+                }, 1500);
+            }
+        }
+
+        // Generate button click event
+        generateBtn.addEventListener('click', () => {
+            const text = userInput.value.trim();
+            
+            if (!text) {
+                showError('Please enter a natural language description');
+                return;
+            }
+            
+            hideError();
+            callApi(text);
+        });
+
+        // Example button click event
+        exampleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const exampleText = btn.getAttribute('data-example');
+                userInput.value = exampleText;
+                userInput.focus();
+            });
+        });
+
+        // Input box Enter key (Ctrl+Enter) to send
+        userInput.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                generateBtn.click();
+            }
+        });
+
+        document.addEventListener('keydown', handleKeyboardShortcuts);
+
+        // Initialize page
+        resetResults();
+        setStatus('', 'Ready');
+        
+        // Display some initial content when page loads
+        window.addEventListener('load', () => {
+            console.log('IZS AI workflow generator loaded, using GraphQL format');
+        });
+    </script>
+</body>
+</html>
